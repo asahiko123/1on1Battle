@@ -37270,6 +37270,8 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./users */ "./resources/js/users.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -37314,6 +37316,32 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/users.js":
+/*!*******************************!*\
+  !*** ./resources/js/users.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).on('change', "#file_photo", function (e) {
+  var reader;
+
+  if (e.target.files.length) {
+    reader = new FileReader();
+
+    reader.onload = function (e) {
+      var userThumbnail;
+      userThumbnail = document.getElementById('thumbnail');
+      $("#userImgPreview").addClass("is-active");
+      userThumbnail.setAttribute('src', e.target.result);
+    };
+
+    return reader.readAsDataURL(e.target.files[0]);
+  }
+});
 
 /***/ }),
 
