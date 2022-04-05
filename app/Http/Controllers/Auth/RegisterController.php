@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Services\CheckExtensionServices;
+use App\Services\FileUploadServices;
 
 
 use Invention\Image\Facades\Image;
@@ -74,16 +75,13 @@ class RegisterController extends Controller
 
         $filenameWithExt = $imageFile->getClientOriginalName();
 
-        $fileName = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+        $list = FileUploadServices::fileUpload($imageFile);
+        
+        list($extension,$fileNameToStore,$fileData) = $list;
 
-        $extention = $imageFile->getClientOriginalExtension();
-
-        $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-
-        $fileData = file_get_contents($imageFile->getRealPath());
 
         $data_url = CheckExtensionServices::checkExtension($fileData,$extension);
-        
+
         $image = Image::make($data_url);
 
         $image->resize(400,400)->save(storage_path().'/app/public/images/'.$fileNameToStore);
