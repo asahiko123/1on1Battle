@@ -12,7 +12,7 @@ use App\Services\CheckExtensionServices;
 use App\Services\FileUploadServices;
 
 
-use Invention\Image\Facades\Image;
+use Intervention\Image\Facades\Image;
 
 class RegisterController extends Controller
 {
@@ -73,10 +73,9 @@ class RegisterController extends Controller
     {
         $imageFile = $data['profile_img'];
 
-        $filenameWithExt = $imageFile->getClientOriginalName();
 
         $list = FileUploadServices::fileUpload($imageFile);
-        
+
         list($extension,$fileNameToStore,$fileData) = $list;
 
 
@@ -85,10 +84,6 @@ class RegisterController extends Controller
         $image = Image::make($data_url);
 
         $image->resize(400,400)->save(storage_path().'/app/public/images/'.$fileNameToStore);
-
-
-    
-
 
         return User::create([
             'name' => $data['name'],

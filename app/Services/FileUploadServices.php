@@ -10,7 +10,7 @@ class FileUploadServices{
 
         $fileName = pathinfo($filenameWithExt,PATHINFO_FILENAME);
 
-        $extention = $imageFile->getClientOriginalExtension();
+        $extension = $imageFile->getClientOriginalExtension();
 
         $fileNameToStore = $fileName.'_'.time().'.'.$extension;
 
