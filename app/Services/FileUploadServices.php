@@ -16,7 +16,7 @@ class FileUploadServices{
 
         $fileData = file_get_contents($imageFile->getRealPath());
 
-        $list = [$extension,$fileNameToStore,$fileData];
+        $list = [$extension,$fileNameToStore,$fileData]; //拡張子、ファイル名、ファイルデータ
 
         return $list;
 
