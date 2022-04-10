@@ -7,6 +7,18 @@ use App\Question;
 
 class QuestionController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function top()
+    {
+
+        return view('questions.top');
+    }
+
     /**
      * Display a listing of the resource.
      *
