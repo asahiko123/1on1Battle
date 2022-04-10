@@ -8,6 +8,7 @@ use App\User;
 
 class UserController extends Controller
 {
+    
     public function show($id){
 
         $user = User::findorFail($id);
