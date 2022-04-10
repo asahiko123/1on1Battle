@@ -58,8 +58,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'profile_img' =>['file','image','mimes:jpeg,png,jpg,gif','max:2000'],
-            'self_introduction' =>['string','max:255'],
+            // 'profile_img' =>['file','image','mimes:jpeg,png,jpg,gif','max:2000'],
+            // 'self_introduction' =>['string','max:255'],
         ]);
     }
 
@@ -71,27 +71,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $imageFile = $data['profile_img'];
+        // $imageFile = $data['profile_img'];
 
 
-        $list = FileUploadServices::fileUpload($imageFile);
+        // $list = FileUploadServices::fileUpload($imageFile);
 
-        list($extension,$fileNameToStore,$fileData) = $list;
+        // list($extension,$fileNameToStore,$fileData) = $list;
 
 
-        $data_url = CheckExtensionServices::checkExtension($fileData,$extension);
+        // $data_url = CheckExtensionServices::checkExtension($fileData,$extension);
 
-        $image = Image::make($data_url);
+        // $image = Image::make($data_url);
 
-        $image->resize(400,400)->save(storage_path().'/app/public/images/'.$fileNameToStore);
+        // $image->resize(400,400)->save(storage_path().'/app/public/images/'.$fileNameToStore);
 
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'self_introduction' => $data['self_introduction'],
-            'sex' => $data['sex'],
-            'profile_img' => $fileNameToStore,
+            // 'self_introduction' => $data['self_introduction'],
+            // 'sex' => $data['sex'],
+            // 'profile_img' => $fileNameToStore,
         ]);
     }
 }
