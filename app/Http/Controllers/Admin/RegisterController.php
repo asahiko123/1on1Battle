@@ -7,8 +7,12 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Services\CheckExtensionServices;
 use App\Services\FileUploadServices;
+
 use App\Admin;
 
 
@@ -84,5 +88,18 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
 
         ]);
+    }
+
+    protected function register(Request $request){
+
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        Auth::guard('admin')->login($user);
+
+        return $request->wantsJson() ? new JsonResponse([],201) : redirect(route('admin.index'));
+
+
     }
 }
