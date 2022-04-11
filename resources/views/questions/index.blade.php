@@ -9,7 +9,7 @@
                 @foreach($questions as $question)
                 <li data-user_id="{{ $question->id }}">
                   <div class="userName">{{ $question->statement }}</div>
-                  <img src="{{ '/storage/images'.$question->card_image}}">
+                  <img src="{{ '/app/public/images/'.$question->card_image}}">
                   <div class="like"></div>
                   <div class="dislike"></div>
                 </li>

@@ -28,7 +28,7 @@
 
       <div class="form-group">
         <label>質問文</label>
-        <input type="text" name="statement" class="form-control">
+        <input type="text" name="statement" class="form-control" value="{{$question->statement}}">
       </div>
 
       <div class="text-center">

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Question;
+use App\Services\FileUploadServices;
+use App\Services\CheckExtensionServices;
+use Intervention\Image\Facades\Image;
+
 
 class QuestionController extends Controller
 {
@@ -84,7 +88,29 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question = Question::find($id);
+
+        if(!is_null($request['card_image'])){
+            $imageFile = $request['card_image'];
+
+            $list = FileUploadServices::fileUpload($imageFile);
+            list($extension,$fileNameToStore,$fileData) = $list;
+
+            $data_url = CheckExtensionServices::checkExtension($fileData,$extension);
+
+            $image = Image::make($data_url);
+
+            $image->resize(400,400)->save(storage_path(). '/app/public/images/' . $fileNameToStore);
+
+            $question->card_image = $fileNameToStore;
+        }
+
+        $question->statement = $request->statement;
+        
+        $question->save();
+
+        return redirect('/admin/index');
+
     }
 
     /**
