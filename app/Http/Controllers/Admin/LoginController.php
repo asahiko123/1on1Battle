@@ -40,20 +40,35 @@ class LoginController extends Controller
         $this->middleware('guest:admin')->except('logout');
     }
 
-    public function login(){
-        return view('admin.login');
+    public function index(){
+        return view('admin.login.index');
     }
 
-    public function guard(){
-        return Auth::guard('admin');
+    public function login(Request $request){
+
+        $credentials = $request->only(['name','email','password']);
+
+        if(Auth::guard('admin')->attempt($credentials)){
+
+            return redirect()->route('admin.index')->with([
+                'login_message' => 'ログインしました'
+            ]);
+        }
+
+        return back()->withErrors([
+            'login' => ['ログインしました'],
+        ]);
     }
+
 
     public function logout(Request $request){
 
-        Auth::guard('admin')->logout();
-        $request->session()->flush();//フラッシュデータの受け渡し
-        $request->session()->regenerate();// セッションIDの再発行
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();// セッションIDの再発行
 
-        return redirect(route('admin.login'));
+        return redirect()->route('admin.login')->with([
+            'logout_message' => 'ログアウトしました'
+        ]);
     }
 }

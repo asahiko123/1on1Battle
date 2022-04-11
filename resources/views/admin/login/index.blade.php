@@ -7,7 +7,7 @@
       <i class="fas fa-user fa-3x"></i>
     </div>
     <h2 class="title">管理者ログイン</h2>
-    <form class="form" method="POST" action="{{ route('login') }}">
+    <form class="form" method="POST" action="{{ route('admin.login.login') }}">
     @csrf
       <div class="form-group @error('email')has-error @enderror">
       <label>メールアドレス</label>
@@ -33,7 +33,7 @@
       <button type="submit" class="loginBtn">ログイン</button>
       </div>
       <div class="linkToLogin">
-        <a href="{{ route('register') }}">アカウント作成はこちら</a>
+        <a href="{{ route('admin.register') }}">アカウント作成はこちら</a>
       </div>
     </form>
   </div>

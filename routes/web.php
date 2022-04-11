@@ -28,9 +28,12 @@ Route::get('index','QuestionController@index')->name('questions.index');
 */
 
 Route::group(['prefix' => 'admin'],function(){
-    Route::get('register','Admin\RegisterController@register')->name('admin.register');
-    Route::get('/', function(){return redirect('/admin/index');})->name('admin.home');
-    Route::get('login','Admin\LoginController@login')->name('admin.login');
+    Route::post('register','Admin\RegisterController@register')->name('admin.register');
+    Route::get('register','Admin\RegisterController@index')->name('admin.login.index');
+
+    Route::get('login','Admin\LoginController@index')->name('admin.login.index');
+    Route::post('login','Admin\LoginController@login')->name('admin.login.login');
+    Route::get('logout','Admin\LoginController@logout')->name('admin.login.logout');
 });
 
 /*
@@ -41,7 +44,7 @@ Route::group(['prefix' => 'admin'],function(){
 */
 Route::group(['prefix' => 'admin','middleware' => 'auth:admin'],function(){
 
-    Route::get('index','QuestionController@top')->name('questions.top');
+    Route::get('index','Admin\HomeController@index')->name('admin.index');
     Route::get('show/{id}','QuestionController@show')->name('questions.show');
     Route::get('edit/{id}', 'QuestionController@edit')->name('questions.edit');
     Route::post('update/{id}', 'QuestionController@update')->name('questions.update');

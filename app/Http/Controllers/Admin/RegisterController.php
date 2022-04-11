@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Services\CheckExtensionServices;
 use App\Services\FileUploadServices;
+use App\Admin;
 
 
 use Intervention\Image\Facades\Image;
@@ -29,32 +29,29 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+        public function __construct()
+        {
+            $this->middleware('guest:admin');
+        }
+
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
+
     protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
 
 
     // 新規登録画面
-    public function register()
+    public function index()
     {
         return view('admin.register');
-    }
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest:admin');
-    }
-
-    public function guard(){
-        return Auth::guard('admin');
     }
 
     /**
@@ -76,7 +73,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Admin
      */
     protected function create(array $data)
     {
@@ -85,7 +82,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            
+
         ]);
     }
 }
