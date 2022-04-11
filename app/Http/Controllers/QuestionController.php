@@ -71,7 +71,8 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = Question::find($id);
+        return view('questions.edit',compact('question'));
     }
 
     /**
