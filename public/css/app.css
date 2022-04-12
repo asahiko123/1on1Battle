@@ -21305,6 +21305,7 @@ readers do not read off random characters that represent icons */
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+  align-items: center;
 }
 
 .loginPage_contents_title {
