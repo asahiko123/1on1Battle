@@ -53,7 +53,31 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $question = new Question;
+
+        if(!is_null($request['card_image'])){
+            $imageFile = $request['card_image'];
+
+            $list = FileUploadServices::fileUpload($imageFile);
+            list($extension,$fileNameToStore,$fileData) = $list;
+
+            $data_url = CheckExtensionServices::checkExtension($fileData,$extension);
+
+            $image = Image::make($data_url);
+
+            $image->resize(400,400)->save(storage_path(). '/app/public/images/' . $fileNameToStore);
+
+            $question->card_image = $fileNameToStore;
+        }
+
+        $question->statement = $request->statement;
+        
+        $question->save();
+
+        return redirect('/admin/index');
+
+        
     }
 
     /**
