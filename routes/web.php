@@ -44,12 +44,13 @@ Route::group(['prefix' => 'admin'],function(){
 */
 Route::group(['prefix' => 'admin','middleware' => 'auth:admin'],function(){
 
-    Route::get('index','Admin\HomeController@index')->name('admin.index');
+    Route::match(['get','post'],'index','Admin\HomeController@index')->name('admin.index');
     Route::get('show/{id}','QuestionController@show')->name('questions.show');
     Route::get('edit/{id}', 'QuestionController@edit')->name('questions.edit');
     Route::post('update/{id}', 'QuestionController@update')->name('questions.update');
     Route::post('logout','Admin\LoginController@logout')->name('admin.logout');
     Route::post('store','QuestionController@store')->name('questions.store');
+    Route::post('delete/{id}','QuestionController@destroy')->name('questions.destroy');
 
 });
 

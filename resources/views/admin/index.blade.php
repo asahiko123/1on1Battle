@@ -36,12 +36,19 @@
               <button type="submit" class="btn btn-info">登録する</button>
               </div>
             </form>
+
             <tbody>
                 @foreach($questions as $question)
                 <tr>
                     <td> {{$question->id}}</td>
                     <td> {{$question->statement}}</td>
                     <td><button class="btn btn-success text-nowrap" onclick="location.href='{{ route('questions.edit',['id'=> $question->id])}}'">編集</button></td>
+                    <td>
+                      <form method="POST" action="{{route('questions.destroy',['id'=> $question->id])}}">
+                        @csrf
+                        <button type ="submit" class="btn btn-danger text-nowrap">削除</button>
+                      </form>
+                    </td>
                 </tr>
                @endforeach
             </tbody>
