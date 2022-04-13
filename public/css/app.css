@@ -21794,3 +21794,12 @@ body {
   color: #dccbcb;
 }
 
+#resultForm {
+  text-align: center;
+  text-decoration: none;
+}
+
+#resultForm li {
+  list-style: none;
+}
+

@@ -29,8 +29,9 @@ class QuestionController extends Controller
     public function index()
     {
         $questions = Question::all();
+        $questionsCount = $questions->count();
 
-        return view('questions.index' ,compact('questions'));
+        return view('questions.index' ,compact('questions','questionsCount'));
     }
 
     /**

@@ -17,5 +17,20 @@
             </ul>
             <div class="noUser">近くにお相手がいません。</div>
         </div>
+        <div id="resultForm" style="display: none">
+            <h1>おすすめ結果</h1>
+            <ul>
+                <li class="recommendCandy">aaaa</li>
+                <li class="recommendCandy">bbbb</li>
+                <li class="recommendCandy">xxx</li>
+            </ul>
+            
+        </div>
     </div>
 </div>
+
+<script>
+    var questionsNum = {{$questionsCount}};
+</script>
+
+@endsection

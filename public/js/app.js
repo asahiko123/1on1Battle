@@ -37332,11 +37332,43 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$("#tinderslide").jTinder();
+var currentQuestionIndex = 0;
+console.log('aaa');
+
+var postReaction = function postReaction() {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    type: "POST",
+    url: "api/like"
+  });
+};
+
+$("#tinderslide").jTinder({
+  onDislike: function onDislike(item) {
+    console.log(item);
+    currentQuestionIndex++;
+    checkQuestionNum();
+  },
+  onLike: function onLike(item) {
+    currentQuestionIndex++;
+    checkQuestionNum();
+  }
+});
 $('.actions .like, .actions .dislike').click(function (e) {
   e.preventDefault();
   $("#tinderslide").jTinder($(this).attr('class'));
 });
+
+function checkQuestionNum() {
+  if (currentQuestionIndex === questionsNum) {
+    $("#tinderslide").css('display', 'none');
+    $("#resultForm").css('display', 'block');
+  }
+}
 
 /***/ }),
 
