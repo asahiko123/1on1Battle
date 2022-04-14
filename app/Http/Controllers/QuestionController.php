@@ -55,7 +55,7 @@ class QuestionController extends Controller
         
         $question = new Question;
 
-        CardImagesUploadServices::cardImagesUpload($request);
+        CardImagesUploadServices::cardImagesUpload($request,$question);
 
         $question->statement = $request->statement;
         
@@ -100,7 +100,7 @@ class QuestionController extends Controller
     {
         $question = Question::find($id);
 
-        CardImagesUploadServices::cardImagesUpload($request);
+        CardImagesUploadServices::cardImagesUpload($request,$question);
 
         $question->statement = $request->statement;
         

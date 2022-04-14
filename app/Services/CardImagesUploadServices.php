@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class CardImagesUploadServices{
 
-    public static function cardImagesUpload(Request $request){
+    public static function cardImagesUpload(Request $request,$question){
 
         if(!is_null($request['card_image'])){
             $imageFile = $request['card_image'];
