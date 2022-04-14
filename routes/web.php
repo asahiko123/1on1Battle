@@ -51,6 +51,11 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:admin'],function(){
     Route::post('logout','Admin\LoginController@logout')->name('admin.logout');
     Route::post('store','QuestionController@store')->name('questions.store');
     Route::post('delete/{id}','QuestionController@destroy')->name('questions.destroy');
+    Route::match(['get','post'],'category/index','CategoryController@index')->name('category.index');
+    Route::post('category/store','CategoryController@store')->name('category.store');
+    Route::get('category/edit/{id}','CategoryController@edit')->name('category.edit');
+    Route::post('category/update/{id}','CategoryController@update')->name('category.update');
+    Route::post('category/delete/{id}','CategoryController@destroy')->name('category.destroy');
 
 });
 
