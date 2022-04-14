@@ -37333,7 +37333,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ (function(module, exports) {
 
 var currentQuestionIndex = 0;
-console.log('aaa');
 
 var postReaction = function postReaction() {
   $.ajaxSetup({
@@ -37349,13 +37348,14 @@ var postReaction = function postReaction() {
 
 $("#tinderslide").jTinder({
   onDislike: function onDislike(item) {
-    console.log(item);
     currentQuestionIndex++;
     checkQuestionNum();
+    storeToSessionStorage('like', myCallback);
   },
   onLike: function onLike(item) {
     currentQuestionIndex++;
     checkQuestionNum();
+    storeToSessionStorage('dislike', myCallback);
   }
 });
 $('.actions .like, .actions .dislike').click(function (e) {
@@ -37367,8 +37367,44 @@ function checkQuestionNum() {
   if (currentQuestionIndex === questionsNum) {
     $("#tinderslide").css('display', 'none');
     $("#resultForm").css('display', 'block');
+    sessionStorage.clear();
   }
 }
+
+function storeToSessionStorage(status, currentQuestionStatement) {
+  console.log('セッション'); // let dataList = [];
+
+  if (status === 'like') {
+    var sessionData = {
+      category: currentQuestionStatement(tasteList),
+      status: status
+    };
+    sessionStorage.setItem('data', sessionData);
+  } else {
+    var _sessionData = {
+      category: currentQuestionStatement(tasteList),
+      status: status
+    };
+    sessionStorage.setItem('data', _sessionData);
+  }
+}
+
+var myCallback = function myCallback(list) {
+  var statement = document.getElementsByClassName('userName');
+  console.log(statement);
+  var currentQuestionStatement = statement.item(questionsNum - 1 - currentQuestionIndex);
+  console.log(questionsNum);
+  console.log(currentQuestionIndex);
+  console.log(currentQuestionStatement.innerHTML);
+  console.log(list);
+  list.forEach(function (el) {
+    if (currentQuestionStatement.innerHTML.includes(el)) {
+      console.log(el);
+      return el;
+    }
+  });
+  return;
+};
 
 /***/ }),
 

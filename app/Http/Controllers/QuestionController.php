@@ -28,10 +28,27 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::all();
+        $tasteList = [];
+        $questions = Question::orderBy('id','desc')->get();
         $questionsCount = $questions->count();
 
-        return view('questions.index' ,compact('questions','questionsCount'));
+        foreach($questions as $question){
+            $sentences = $question->statement;
+            
+            if(strpos($sentences,'濃い味') !== false){
+                array_push($tasteList,'濃い味');
+            }
+            if(strpos($sentences,'フルーティー')!== false){
+                array_push($tasteList,'フルーティー');
+            }
+            if(strpos($sentences,'さっぱり')!== false){
+                array_push($tasteList,'さっぱり');
+            }
+        }
+
+        $tasteList_json = json_encode($tasteList);
+
+        return view('questions.index' ,compact('questions','questionsCount','tasteList_json'));
     }
 
     /**
