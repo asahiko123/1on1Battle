@@ -1,5 +1,5 @@
+sessionStorage.clear();
 let currentQuestionIndex = 0;
-
 
 let postReaction = function(){
     $.ajaxSetup({
@@ -20,13 +20,13 @@ let postReaction = function(){
 $("#tinderslide").jTinder({
     onDislike: function(item){
         currentQuestionIndex++;
-        checkQuestionNum();
         storeToSessionStorage('dislike',myCallback);
+        checkQuestionNum();
     },
     onLike: function(item){
         currentQuestionIndex++;
-        checkQuestionNum();
         storeToSessionStorage('like',myCallback);
+        checkQuestionNum();
 
     }
 });
@@ -37,10 +37,10 @@ $('.actions .like, .actions .dislike').click(function(e){
 
 function checkQuestionNum(){
     if(currentQuestionIndex === questionsNum){
+
         $("#tinderslide").css('display','none');
         $("#resultForm").css('display','block');
 
-        sessionStorage.clear();
     }
 }
 
@@ -55,11 +55,15 @@ function storeToSessionStorage(status,currentQuestionStatement){
 
             console.log('データリスト作成');
 
-            let sessionData = {
+            let sessionDataLast = {
                 status : status
             }
 
-           sessionStorage.setItem(category,JSON.stringify(sessionData));
+           sessionStorage.setItem(category,JSON.stringify(sessionDataLast));
+
+           console.log(sessionStorage.getItem(category));
+
+           
 
         }else{
 

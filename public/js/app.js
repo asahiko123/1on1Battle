@@ -37332,6 +37332,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+sessionStorage.clear();
 var currentQuestionIndex = 0;
 
 var postReaction = function postReaction() {
@@ -37349,13 +37350,13 @@ var postReaction = function postReaction() {
 $("#tinderslide").jTinder({
   onDislike: function onDislike(item) {
     currentQuestionIndex++;
-    checkQuestionNum();
     storeToSessionStorage('dislike', myCallback);
+    checkQuestionNum();
   },
   onLike: function onLike(item) {
     currentQuestionIndex++;
-    checkQuestionNum();
     storeToSessionStorage('like', myCallback);
+    checkQuestionNum();
   }
 });
 $('.actions .like, .actions .dislike').click(function (e) {
@@ -37367,7 +37368,6 @@ function checkQuestionNum() {
   if (currentQuestionIndex === questionsNum) {
     $("#tinderslide").css('display', 'none');
     $("#resultForm").css('display', 'block');
-    sessionStorage.clear();
   }
 }
 
@@ -37377,16 +37377,17 @@ function storeToSessionStorage(status, currentQuestionStatement) {
 
   if (currentQuestionIndex === questionsNum) {
     console.log('データリスト作成');
+    var sessionDataLast = {
+      status: status
+    };
+    sessionStorage.setItem(category, JSON.stringify(sessionDataLast));
+    console.log(sessionStorage.getItem(category));
+  } else {
+    console.log('データ追加');
     var sessionData = {
       status: status
     };
     sessionStorage.setItem(category, JSON.stringify(sessionData));
-  } else {
-    console.log('データ追加');
-    var _sessionData = {
-      status: status
-    };
-    sessionStorage.setItem(category, JSON.stringify(_sessionData));
   }
 }
 
