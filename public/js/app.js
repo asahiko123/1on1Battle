@@ -37335,7 +37335,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 sessionStorage.clear();
 var currentQuestionIndex = 0;
 
-var postReaction = function postReaction() {
+var postReaction = function postReaction(category, reaction) {
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -37343,7 +37343,14 @@ var postReaction = function postReaction() {
   });
   $.ajax({
     type: "POST",
-    url: "api/like"
+    url: "api/search",
+    data: {
+      category: category,
+      status: reaction
+    },
+    success: function success(j_data) {
+      console.log('success');
+    }
   });
 };
 
@@ -37374,21 +37381,12 @@ function checkQuestionNum() {
 function storeToSessionStorage(status, currentQuestionStatement) {
   var category = currentQuestionStatement(tasteList);
   var dataList = [];
-
-  if (currentQuestionIndex === questionsNum) {
-    console.log('データリスト作成');
-    var sessionDataLast = {
-      status: status
-    };
-    sessionStorage.setItem(category, JSON.stringify(sessionDataLast));
-    console.log(sessionStorage.getItem(category));
-  } else {
-    console.log('データ追加');
-    var sessionData = {
-      status: status
-    };
-    sessionStorage.setItem(category, JSON.stringify(sessionData));
-  }
+  console.log('データ追加');
+  var sessionData = {
+    status: status
+  };
+  sessionStorage.setItem(category, JSON.stringify(sessionData));
+  postReaction(category, status);
 }
 
 var myCallback = function myCallback() {

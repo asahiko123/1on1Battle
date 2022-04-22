@@ -1,7 +1,7 @@
 sessionStorage.clear();
 let currentQuestionIndex = 0;
 
-let postReaction = function(){
+let postReaction = function(category,reaction){
     $.ajaxSetup({
         headers:{
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -11,7 +11,14 @@ let postReaction = function(){
 
     $.ajax({
         type:"POST",
-        url:"api/like"
+        url:"api/search",
+        data: {
+            category: category,
+            status: reaction
+        },
+        success:function(j_data){
+            console.log('success');
+        }
     })
 }
 
@@ -22,6 +29,7 @@ $("#tinderslide").jTinder({
         currentQuestionIndex++;
         storeToSessionStorage('dislike',myCallback);
         checkQuestionNum();
+        
     },
     onLike: function(item){
         currentQuestionIndex++;
@@ -51,31 +59,15 @@ function storeToSessionStorage(status,currentQuestionStatement){
         const category = currentQuestionStatement(tasteList);
         const dataList = [];
 
-        if(currentQuestionIndex === questionsNum){
+        console.log('データ追加')
 
-            console.log('データリスト作成');
-
-            let sessionDataLast = {
-                status : status
-            }
-
-           sessionStorage.setItem(category,JSON.stringify(sessionDataLast));
-
-           console.log(sessionStorage.getItem(category));
-
-           
-
-        }else{
-
-            console.log('データ追加')
-
-            let sessionData = {
-                status : status
-            }
-
-           sessionStorage.setItem(category,JSON.stringify(sessionData));
-
+        let sessionData = {
+            status : status
         }
+
+        sessionStorage.setItem(category,JSON.stringify(sessionData));
+        postReaction(category,status);
+
 }
 
 

@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('index','QuestionController@index')->name('questions.index');
 
+Route::post('api/search','ReactionController@create')->name('reaction.create');
+
 /*
 |--------------------------------------------------------------------------
 | 3) Admin 認証不要
@@ -34,6 +36,7 @@ Route::group(['prefix' => 'admin'],function(){
     Route::get('login','Admin\LoginController@index')->name('admin.login.index');
     Route::post('login','Admin\LoginController@login')->name('admin.login.login');
     Route::get('logout','Admin\LoginController@logout')->name('admin.login.logout');
+
 });
 
 /*
@@ -56,6 +59,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:admin'],function(){
     Route::get('category/edit/{id}','CategoryController@edit')->name('category.edit');
     Route::post('category/update/{id}','CategoryController@update')->name('category.update');
     Route::post('category/delete/{id}','CategoryController@destroy')->name('category.destroy');
+
 
 });
 
