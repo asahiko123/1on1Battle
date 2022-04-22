@@ -20,9 +20,17 @@
         <div id="resultForm" style="display: none">
             <h1>おすすめ結果</h1>
             <ul>
+                
                 <li class="recommendCandy">aaaa</li>
                 <li class="recommendCandy">bbbb</li>
                 <li class="recommendCandy">xxx</li>
+
+
+                {{-- @if(isset($selectCandy))
+                @foreach($selectCandy as $candy)
+                <li class="recommendCandy">{{ $candy->name }}</li>
+                @endforeach
+                @endif --}}
             </ul>
             <div class="btn loginPage_contents_btn">
                 <a href="{{route('questions.index')}}" class="text-white">もう一度やる</a>
