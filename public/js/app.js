@@ -37350,12 +37350,12 @@ $("#tinderslide").jTinder({
   onDislike: function onDislike(item) {
     currentQuestionIndex++;
     checkQuestionNum();
-    storeToSessionStorage('like', myCallback);
+    storeToSessionStorage('dislike', myCallback);
   },
   onLike: function onLike(item) {
     currentQuestionIndex++;
     checkQuestionNum();
-    storeToSessionStorage('dislike', myCallback);
+    storeToSessionStorage('like', myCallback);
   }
 });
 $('.actions .like, .actions .dislike').click(function (e) {
@@ -37372,38 +37372,41 @@ function checkQuestionNum() {
 }
 
 function storeToSessionStorage(status, currentQuestionStatement) {
-  console.log('セッション'); // let dataList = [];
+  var category = currentQuestionStatement(tasteList);
+  var dataList = [];
 
-  if (status === 'like') {
+  if (currentQuestionIndex === questionsNum) {
+    console.log('データリスト作成');
     var sessionData = {
-      category: currentQuestionStatement(tasteList),
       status: status
     };
-    sessionStorage.setItem('data', sessionData);
+    sessionStorage.setItem(category, JSON.stringify(sessionData));
   } else {
+    console.log('データ追加');
     var _sessionData = {
-      category: currentQuestionStatement(tasteList),
       status: status
     };
-    sessionStorage.setItem('data', _sessionData);
+    sessionStorage.setItem(category, JSON.stringify(_sessionData));
   }
 }
 
-var myCallback = function myCallback(list) {
+var myCallback = function myCallback() {
+  var elList;
   var statement = document.getElementsByClassName('userName');
   console.log(statement);
-  var currentQuestionStatement = statement.item(questionsNum - 1 - currentQuestionIndex);
+  var currentQuestionStatement = statement.item(questionsNum - currentQuestionIndex);
   console.log(questionsNum);
   console.log(currentQuestionIndex);
   console.log(currentQuestionStatement.innerHTML);
-  console.log(list);
-  list.forEach(function (el) {
+  console.log(tasteList);
+  tasteList.forEach(function (el) {
     if (currentQuestionStatement.innerHTML.includes(el)) {
       console.log(el);
-      return el;
+      elList = el;
     }
   });
-  return;
+  console.log(elList);
+  return elList;
 };
 
 /***/ }),

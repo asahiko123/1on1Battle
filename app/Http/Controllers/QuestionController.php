@@ -34,17 +34,19 @@ class QuestionController extends Controller
 
         foreach($questions as $question){
             $sentences = $question->statement;
-            
+
             if(strpos($sentences,'濃い味') !== false){
                 array_push($tasteList,'濃い味');
             }
             if(strpos($sentences,'フルーティー')!== false){
                 array_push($tasteList,'フルーティー');
             }
-            if(strpos($sentences,'さっぱり')!== false){
-                array_push($tasteList,'さっぱり');
+            if(strpos($sentences,'酸っぱい')!== false){
+                array_push($tasteList,'酸っぱい');
             }
         }
+
+        var_dump($tasteList);
 
         $tasteList_json = json_encode($tasteList);
 
@@ -69,18 +71,18 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $question = new Question;
 
         CardImagesUploadServices::cardImagesUpload($request,$question);
 
         $question->statement = $request->statement;
-        
+
         $question->save();
 
         return redirect('/admin/index');
 
-        
+
     }
 
     /**
@@ -120,7 +122,7 @@ class QuestionController extends Controller
         CardImagesUploadServices::cardImagesUpload($request,$question);
 
         $question->statement = $request->statement;
-        
+
         $question->save();
 
         return redirect('/admin/index');
@@ -140,6 +142,6 @@ class QuestionController extends Controller
         $question->delete();
 
         return redirect('/admin/index');
-        
+
     }
 }

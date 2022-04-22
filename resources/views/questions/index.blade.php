@@ -24,13 +24,16 @@
                 <li class="recommendCandy">bbbb</li>
                 <li class="recommendCandy">xxx</li>
             </ul>
-            
+            <div class="btn loginPage_contents_btn">
+                <a href="{{route('questions.index')}}" class="text-white">もう一度やる</a>
+            </div>
+
         </div>
     </div>
 </div>
 
 <script>
-  
+
     var questionsNum = {{$questionsCount}};
     let tasteList = <?php echo $tasteList_json; ?>
 

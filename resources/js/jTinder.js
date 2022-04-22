@@ -21,12 +21,12 @@ $("#tinderslide").jTinder({
     onDislike: function(item){
         currentQuestionIndex++;
         checkQuestionNum();
-        storeToSessionStorage('like',myCallback);
+        storeToSessionStorage('dislike',myCallback);
     },
     onLike: function(item){
         currentQuestionIndex++;
         checkQuestionNum();
-        storeToSessionStorage('dislike',myCallback);
+        storeToSessionStorage('like',myCallback);
 
     }
 });
@@ -47,55 +47,62 @@ function checkQuestionNum(){
 
 
 function storeToSessionStorage(status,currentQuestionStatement){
-    console.log('セッション');
-    // let dataList = [];
-    
-        if(status === 'like'){
+
+        const category = currentQuestionStatement(tasteList);
+        const dataList = [];
+
+        if(currentQuestionIndex === questionsNum){
+
+            console.log('データリスト作成');
 
             let sessionData = {
-                category: currentQuestionStatement(tasteList),
                 status : status
             }
 
-            sessionStorage.setItem('data',sessionData);
-            
+           sessionStorage.setItem(category,JSON.stringify(sessionData));
+
         }else{
-            
+
+            console.log('データ追加')
+
             let sessionData = {
-                category: currentQuestionStatement(tasteList),
                 status : status
             }
-           sessionStorage.setItem('data',sessionData);
-            
+
+           sessionStorage.setItem(category,JSON.stringify(sessionData));
+
         }
 }
 
 
-var myCallback = function(list){
+var myCallback = function(){
+
+    let elList;
 
     const statement = document.getElementsByClassName('userName');
 
     console.log(statement);
-    
-    const currentQuestionStatement = statement.item((questionsNum-1)-currentQuestionIndex);
+
+    const currentQuestionStatement = statement.item(questionsNum-currentQuestionIndex);
 
     console.log(questionsNum);
     console.log(currentQuestionIndex);
     console.log(currentQuestionStatement.innerHTML);
+    console.log(tasteList);
 
 
-    console.log(list);
-    list.forEach(el => {
+    tasteList.forEach(el => {
 
         if(currentQuestionStatement.innerHTML.includes(el)){
             console.log(el);
-            return el;
+            elList = el;
         }
 
     });
 
-    return;
-    
+    console.log(elList);
+    return elList;
+
 }
 
 
