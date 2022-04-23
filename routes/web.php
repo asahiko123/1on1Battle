@@ -23,6 +23,7 @@ Route::get('index','QuestionController@index')->name('questions.index');
 
 Route::post('api/search','ReactionController@create')->name('reaction.create');
 
+
 /*
 |--------------------------------------------------------------------------
 | 3) Admin 認証不要
