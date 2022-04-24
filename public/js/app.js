@@ -37323,6 +37323,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     encrypted: true
 // });
 
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('[name=csrf-token]').prop('content')
+  }
+});
+
 /***/ }),
 
 /***/ "./resources/js/jTinder.js":

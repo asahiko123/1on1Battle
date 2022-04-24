@@ -29,6 +29,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
+        
         $tasteList = [];
         $questions = Question::orderBy('id','desc')->get();
         $questionsCount = $questions->count();

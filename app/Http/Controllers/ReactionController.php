@@ -18,10 +18,8 @@ class ReactionController extends Controller
        if($like_status === 'like'){
            $selectCandy = Candy::where('style',$category)->get();
 
-           foreach($selectCandy as $candy){
-               array_push($candy_list,$candy);
-           }
-           Debugbar::info($candy_list);
+           session([$category => $selectCandy]);
+
            Log::debug($selectCandy);
           
        }else{
