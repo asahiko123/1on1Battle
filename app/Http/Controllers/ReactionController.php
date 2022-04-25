@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Candy;
 use Log;
+use Session;
 
 class ReactionController extends Controller
 {
@@ -21,12 +22,13 @@ class ReactionController extends Controller
            session([$category => $selectCandy]);
 
            Log::debug($selectCandy);
-          
+
        }else{
            print_r('嫌いなキャンディーは選ばない');
        }
-       
+
     // return view('questions.index' ,compact('selectCandy'));
 
     }
+
 }

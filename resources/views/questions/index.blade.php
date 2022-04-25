@@ -1,3 +1,10 @@
+@php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+   header("Location:" . $_SERVER['PHP_SELF']);
+   exit;
+}
+
+@endphp
 @extends('layouts.layout')
 
 @section('content')
@@ -20,18 +27,28 @@
         <div id="resultForm" style="display: none">
             <h1>おすすめ結果</h1>
             <ul>
-                
+
                 <li class="recommendCandy">aaa</li>
                 <li class="recommendCandy">bbbb</li>
-                <li class="recommendCandy">xxx</li>
+                <li class="recommendCandy">{{request()->fullUrl()}}</li>
 
-                @if(session()->exists('濃い味'))
+                @if(session()->has('濃い味'))
                 @foreach(Session::get('濃い味') as $candy)
                 <li class="recommendCandy">{{ $candy->name }}</li>
                 @endforeach
                 @endif
+                @if(session()->has('フルーティー'))
+                @foreach(Session::get('フルーティー') as $candy)
+                <li class="recommendCandy">{{ $candy->name }}</li>
+                @endforeach
+                @endif
+                @if(session()->has('酸っぱい'))
+                @foreach(Session::get('酸っぱい') as $candy)
+                <li class="recommendCandy">{{ $candy->name }}</li>
+                @endforeach
+                @endif
 
-   
+
             </ul>
             <div class="btn loginPage_contents_btn">
                 <a href="{{route('questions.index')}}" class="text-white">もう一度やる</a>

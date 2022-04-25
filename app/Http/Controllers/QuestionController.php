@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use Log;
+use Session;
 use App\Services\CardImagesUploadServices;
 
 
@@ -29,7 +30,15 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        
+
+        if(Session::getId()){
+
+            session()->forget('濃い味');
+            session()->forget('フルーティー');
+            session()->forget('酸っぱい');
+
+        }
+
         $tasteList = [];
         $questions = Question::orderBy('id','desc')->get();
         $questionsCount = $questions->count();
@@ -146,4 +155,21 @@ class QuestionController extends Controller
         return redirect('/admin/index');
 
     }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function result()
+    {
+
+        return view('questions.result');
+
+    }
+
+
+
+
 }

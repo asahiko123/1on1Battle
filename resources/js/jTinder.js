@@ -29,7 +29,7 @@ $("#tinderslide").jTinder({
         currentQuestionIndex++;
         storeToSessionStorage('dislike',myCallback);
         checkQuestionNum();
-        
+
     },
     onLike: function(item){
         currentQuestionIndex++;
