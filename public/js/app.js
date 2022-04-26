@@ -37323,12 +37323,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     encrypted: true
 // });
 
-$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('[name=csrf-token]').prop('content')
-  }
-});
-
 /***/ }),
 
 /***/ "./resources/js/jTinder.js":
@@ -37353,12 +37347,24 @@ var postReaction = function postReaction(category, reaction) {
     data: {
       category: category,
       status: reaction
-    },
-    success: function success(j_data) {
-      console.log('success');
     }
-  });
-};
+  }).then( // function(j_data){
+  //     console.log('success');
+  // }
+  fetch('api/search').then(function (response) {
+    // console.log(response.text());
+    var responseText = response.text();
+    var session = document.getElementById('session');
+    session.innerText = responseText;
+  }));
+}; // let getReaction = function(){
+//     fetch("/index",{
+//         method:"GET",
+//     }).then(response => {
+//         console.log(response.status);
+//     })
+// }
+
 
 $("#tinderslide").jTinder({
   onDislike: function onDislike(item) {
@@ -37380,7 +37386,7 @@ $('.actions .like, .actions .dislike').click(function (e) {
 function checkQuestionNum() {
   if (currentQuestionIndex === questionsNum) {
     $("#tinderslide").css('display', 'none');
-    $("#resultForm").css('display', 'block');
+    $("#resultForm").css('display', 'block'); // getReaction();
   }
 }
 

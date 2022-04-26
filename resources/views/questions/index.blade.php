@@ -48,6 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 @endforeach
                 @endif
 
+                <li id="session"></li>
+
 
             </ul>
             <div class="btn loginPage_contents_btn">

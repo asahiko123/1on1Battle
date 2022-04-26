@@ -16,11 +16,29 @@ let postReaction = function(category,reaction){
             category: category,
             status: reaction
         },
-        success:function(j_data){
-            console.log('success');
-        }
-    })
+       
+    }).then(
+        // function(j_data){
+        //     console.log('success');
+        // }
+
+        fetch('api/search')
+        .then((response) => {
+            // console.log(response.text());
+            const responseText = response.text();
+            const session = document.getElementById('session');
+            session.innerText = responseText;
+        })
+    )
 }
+
+// let getReaction = function(){
+//     fetch("/index",{
+//         method:"GET",
+//     }).then(response => {
+//         console.log(response.status);
+//     })
+// }
 
 
 
@@ -49,6 +67,7 @@ function checkQuestionNum(){
         $("#tinderslide").css('display','none');
         $("#resultForm").css('display','block');
 
+        // getReaction();
     }
 }
 

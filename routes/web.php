@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('index','QuestionController@index')->name('questions.index');
 
 Route::post('api/search','ReactionController@create')->name('reaction.create');
+Route::get('api/search','ReactionController@index')->name('reaction.index');
 
 Route::get('result','ReactionController@result')->name('reaction.result');
 

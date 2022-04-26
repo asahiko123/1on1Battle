@@ -9,6 +9,13 @@ use Session;
 
 class ReactionController extends Controller
 {
+
+    public function index(){
+
+        $candy = Candy::all();
+
+        return response()->json(['candy' => $candy]);
+    }
     public function create(Request $request){
 
         $category = $request->category;
@@ -21,13 +28,12 @@ class ReactionController extends Controller
 
            session([$category => $selectCandy]);
 
+
            Log::debug($selectCandy);
 
-       }else{
-           print_r('嫌いなキャンディーは選ばない');
        }
 
-    // return view('questions.index' ,compact('selectCandy'));
+       return response()->json([$category => $selectCandy]);
 
     }
 
