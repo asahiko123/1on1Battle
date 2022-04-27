@@ -1,3 +1,5 @@
+import { makeHTMLComponentsByJs } from "./module";
+
 sessionStorage.clear();
 let currentQuestionIndex = 0;
 
@@ -30,32 +32,7 @@ let postReaction = function(category,reaction){
             keyArray.forEach((el) => {
                 let element = candyList[el];
 
-                if(element !== null){
-
-                    element.forEach((obj) => {
-                        console.log(obj['name']);
-
-                        let ul = document.querySelector('ul.recommend');
-                        let li = document.createElement('li');
-                        let maker = document.createElement('p');
-                        let link = document.createElement('a');
-
-                        li.textContent = obj['name'];
-                        maker.textContent = obj['maker'];
-                        link.href = obj['url'];
-                        link.textContent = '->amazon';
-
-                        ul.appendChild(li);
-                        li.appendChild(maker);
-                        li.appendChild(link);
-                    })
-
-                }else{
-                    let li = document.createElement('li');
-                    li.textContent = '飴ちゃんは品切れだよ...';
-                    let ul = document.querySelector('ul.recommend');
-                    ul.appendChild(li);
-                }
+                makeHTMLComponentsByJs(element);
 
             })
 
@@ -71,13 +48,13 @@ let postReaction = function(category,reaction){
 $("#tinderslide").jTinder({
     onDislike: function(item){
         currentQuestionIndex++;
-        storeToSessionStorage('dislike',myCallback);
+        storeToSessionStorage('dislike',makeCandyTag);
         checkQuestionNum();
 
     },
     onLike: function(item){
         currentQuestionIndex++;
-        storeToSessionStorage('like',myCallback);
+        storeToSessionStorage('like',makeCandyTag);
         checkQuestionNum();
 
     }
@@ -99,9 +76,9 @@ function checkQuestionNum(){
 
 
 
-function storeToSessionStorage(status,currentQuestionStatement){
+function storeToSessionStorage(status,fn){
 
-        const category = currentQuestionStatement(tasteList);
+        const category = fn();
         const dataList = [];
 
         console.log('データ追加')
@@ -116,20 +93,20 @@ function storeToSessionStorage(status,currentQuestionStatement){
 }
 
 
-var myCallback = function(){
+var makeCandyTag = function(){
 
     let elList;
 
     const statement = document.getElementsByClassName('userName');
 
-    console.log(statement);
+    // console.log(statement);
 
     const currentQuestionStatement = statement.item(questionsNum-currentQuestionIndex);
 
-    console.log(questionsNum);
-    console.log(currentQuestionIndex);
-    console.log(currentQuestionStatement.innerHTML);
-    console.log(tasteList);
+    // console.log(questionsNum);
+    // console.log(currentQuestionIndex);
+    // console.log(currentQuestionStatement.innerHTML);
+    // console.log(tasteList);
 
 
     tasteList.forEach(el => {

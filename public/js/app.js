@@ -38113,11 +38113,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./module */ "./resources/js/module.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 sessionStorage.clear();
 var currentQuestionIndex = 0;
@@ -38154,28 +38156,7 @@ var postReaction = function postReaction(category, reaction) {
                 keyArray = Object.keys(candyList);
                 keyArray.forEach(function (el) {
                   var element = candyList[el];
-
-                  if (element !== null) {
-                    element.forEach(function (obj) {
-                      console.log(obj['name']);
-                      var ul = document.querySelector('ul.recommend');
-                      var li = document.createElement('li');
-                      var maker = document.createElement('p');
-                      var link = document.createElement('a');
-                      li.textContent = obj['name'];
-                      maker.textContent = obj['maker'];
-                      link.href = obj['url'];
-                      link.textContent = '->amazon';
-                      ul.appendChild(li);
-                      li.appendChild(maker);
-                      li.appendChild(link);
-                    });
-                  } else {
-                    var li = document.createElement('li');
-                    li.textContent = '飴ちゃんは品切れだよ...';
-                    var ul = document.querySelector('ul.recommend');
-                    ul.appendChild(li);
-                  }
+                  Object(_module__WEBPACK_IMPORTED_MODULE_1__["makeHTMLComponentsByJs"])(element);
                 });
 
               case 6:
@@ -38198,12 +38179,12 @@ var postReaction = function postReaction(category, reaction) {
 $("#tinderslide").jTinder({
   onDislike: function onDislike(item) {
     currentQuestionIndex++;
-    storeToSessionStorage('dislike', myCallback);
+    storeToSessionStorage('dislike', makeCandyTag);
     checkQuestionNum();
   },
   onLike: function onLike(item) {
     currentQuestionIndex++;
-    storeToSessionStorage('like', myCallback);
+    storeToSessionStorage('like', makeCandyTag);
     checkQuestionNum();
   }
 });
@@ -38219,8 +38200,8 @@ function checkQuestionNum() {
   }
 }
 
-function storeToSessionStorage(status, currentQuestionStatement) {
-  var category = currentQuestionStatement(tasteList);
+function storeToSessionStorage(status, fn) {
+  var category = fn();
   var dataList = [];
   console.log('データ追加');
   var sessionData = {
@@ -38230,15 +38211,15 @@ function storeToSessionStorage(status, currentQuestionStatement) {
   postReaction(category, status);
 }
 
-var myCallback = function myCallback() {
+var makeCandyTag = function makeCandyTag() {
   var elList;
-  var statement = document.getElementsByClassName('userName');
-  console.log(statement);
-  var currentQuestionStatement = statement.item(questionsNum - currentQuestionIndex);
-  console.log(questionsNum);
-  console.log(currentQuestionIndex);
-  console.log(currentQuestionStatement.innerHTML);
-  console.log(tasteList);
+  var statement = document.getElementsByClassName('userName'); // console.log(statement);
+
+  var currentQuestionStatement = statement.item(questionsNum - currentQuestionIndex); // console.log(questionsNum);
+  // console.log(currentQuestionIndex);
+  // console.log(currentQuestionStatement.innerHTML);
+  // console.log(tasteList);
+
   tasteList.forEach(function (el) {
     if (currentQuestionStatement.innerHTML.includes(el)) {
       console.log(el);
@@ -38656,6 +38637,44 @@ var myCallback = function myCallback() {
     return this;
   };
 })(jQuery, window, document);
+
+/***/ }),
+
+/***/ "./resources/js/module.js":
+/*!********************************!*\
+  !*** ./resources/js/module.js ***!
+  \********************************/
+/*! exports provided: makeHTMLComponentsByJs */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeHTMLComponentsByJs", function() { return makeHTMLComponentsByJs; });
+function makeHTMLComponentsByJs(obj) {
+  if (obj !== null) {
+    obj.forEach(function (element) {
+      console.log(element['name']);
+      var ul = document.querySelector('ul.recommend');
+      var li = document.createElement('li');
+      var maker = document.createElement('p');
+      var link = document.createElement('a');
+      li.textContent = element['name'];
+      maker.textContent = element['maker'];
+      link.href = element['url'];
+      link.textContent = '->amazon';
+      ul.appendChild(li);
+      li.appendChild(maker);
+      li.appendChild(link);
+    });
+  } else {
+    var li = document.createElement('li');
+    li.textContent = '飴ちゃんは品切れだよ...';
+    var ul = document.querySelector('ul.recommend');
+    ul.appendChild(li);
+  }
+}
+
+
 
 /***/ }),
 
