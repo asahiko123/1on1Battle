@@ -1,10 +1,3 @@
-@php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-   header("Location:" . $_SERVER['PHP_SELF']);
-   exit;
-}
-
-@endphp
 @extends('layouts.layout')
 
 @section('content')
