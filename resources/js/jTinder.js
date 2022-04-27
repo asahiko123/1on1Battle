@@ -2,44 +2,59 @@ sessionStorage.clear();
 let currentQuestionIndex = 0;
 
 let postReaction = function(category,reaction){
-    $.ajaxSetup({
-        headers:{
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
 
-        }
-    });
-
-    $.ajax({
-        type:"POST",
+    fetch('api/search',{
+        method:"POST",
         url:"api/search",
-        data: {
+        body: JSON.stringify({
             category: category,
             status: reaction
-        },
-       
-    }).then(
-        // function(j_data){
-        //     console.log('success');
-        // }
+        }),
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            'Content-Type': 'application/json'
+          },
+    })
+    .then((response) => {
+        var buildResultForm = async function(){
 
-        fetch('api/search')
-        .then((response) => {
-            // console.log(response.text());
-            const responseText = response.text();
-            const session = document.getElementById('session');
-            session.innerText = responseText;
-        })
-    )
+            var result = await new Promise((resolve, reject) => {
+                var res = response.text();
+                resolve(res);
+            });
+
+            const candyList = JSON.parse(result);
+
+            let keyArray = Object.keys(candyList);
+
+            keyArray.forEach((el) => {
+                let element = candyList[el];
+
+                if(element !== null){
+
+                    element.forEach((obj) => {
+                        console.log(obj['name']);
+
+                        let li = document.createElement('li');
+                        let maker = document.createElement('p');
+                        li.textContent = obj['name'];
+                        maker.textContent = obj['maker'];
+                        let ul = document.querySelector('ul.recommend');
+                        ul.appendChild(li);
+                        li.appendChild(maker);
+                    })
+
+                }
+
+            })
+
+        }
+
+        buildResultForm();
+
+    })
+
 }
-
-// let getReaction = function(){
-//     fetch("/index",{
-//         method:"GET",
-//     }).then(response => {
-//         console.log(response.status);
-//     })
-// }
-
 
 
 $("#tinderslide").jTinder({

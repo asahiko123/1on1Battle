@@ -10,12 +10,6 @@ use Session;
 class ReactionController extends Controller
 {
 
-    public function index(){
-
-        $candy = Candy::all();
-
-        return response()->json(['candy' => $candy]);
-    }
     public function create(Request $request){
 
         $category = $request->category;
@@ -24,14 +18,16 @@ class ReactionController extends Controller
         $candy_list = array();
 
        if($like_status === 'like'){
+
            $selectCandy = Candy::where('style',$category)->get();
 
-           session([$category => $selectCandy]);
+        //    Log::debug($selectCandy);
 
+       }else{
 
-           Log::debug($selectCandy);
-
+            $selectCandy = null;
        }
+
 
        return response()->json([$category => $selectCandy]);
 
