@@ -16,16 +16,19 @@ services:
       - DB_USERNAME=${DB_USER:-root}
       - DB_PASSWORD=${DB_PASS:-root}
   db:
-    build:
-      context: .
-      dockerfile: ./infra/docker/mysql/Dockerfile
+    image: 'mysql/mysql-server:8.0'
     ports:
-      - ${DB_PORT:-3306}:3306
+      - '${FORWARD_DB_PORT:-3306}:3306'
     volumes:
       - db-store:/var/lib/mysql
+      - .infra/docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
-      - MYSQL_DATABASE=${DB_NAME:-match_candy}
-      - MYSQL_USER=${DB_USER:root}
-      - MYSQL_PASSWORD=${DB_PASS:root}
-      - MYSQL_ROOT_PASSWORD=${DB_PASS:root}
-    
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+
+volumes:
+  db-store:
