@@ -8,28 +8,28 @@
   <div class='container'>
 
     <form class="form mt-5" method="POST" action="{{ route('admin.register') }}" enctype="multipart/form-data">
-    @csrf
+        @csrf
 
-    <div class="form-group @error('name')has-error @enderror">
-        <label>名前</label>
-        <input type="name" name="name" class="form-control" placeholder="名前を入力してください">
-        @error('name')
-            <span class="errorMessage">
-            {{ $message }}
-            </span>
-        @enderror
-    </div>
+        <div class="form-group @error('name')has-error @enderror">
+            <label>名前</label>
+            <input type="name" name="name" class="form-control" placeholder="名前を入力してください">
+            @error('name')
+                <span class="errorMessage">
+                {{ $message }}
+                </span>
+            @enderror
+        </div>
 
 
-    <div class="form-group @error('email')has-error @enderror">
-    <label>メールアドレス</label>
-    <input type="email" name="email" class="form-control" placeholder="メールアドレスを入力してください">
-    @error('email')
-        <span class="errorMessage">
-            {{ $message }}
-        </span>
-    @enderror
-    </div>
+        <div class="form-group @error('email')has-error @enderror">
+            <label>メールアドレス</label>
+            <input type="email" name="email" class="form-control" placeholder="メールアドレスを入力してください">
+            @error('email')
+                <span class="errorMessage">
+                    {{ $message }}
+                </span>
+            @enderror
+        </div>
 
         <div class="form-group @error('password')has-error @enderror">
             <label>パスワード</label>
@@ -47,14 +47,12 @@
             <input type="password" name="password_confirmation" class="form-control" placeholder="パスワードを再度入力してください">
         </div>
 
+        <div class="text-center">
+            <button type="submit" class="btn submitBtn">はじめる</button>
+            <div class="linkToLogin">
+                <a href="{{ route('admin.login.index') }}">ログインはこちら</a>
+            </div>
         </div>
-
-      <div class="text-center">
-      <button type="submit" class="btn submitBtn">はじめる</button>
-      <div class="linkToLogin">
-        <a href="{{ route('admin.login.index') }}">ログインはこちら</a>
-      </div>
-      </div>
     </form>
   </div>
 </div>
