@@ -9,11 +9,13 @@ function makeHTMLComponentsByJs(obj){
             let li = document.createElement('li');
             let maker = document.createElement('p');
             let link = document.createElement('a');
+            let img = document.createElement('img');
 
             li.textContent = element['name'];
             maker.textContent = element['maker'];
             link.href = element['url'];
             link.textContent = '->amazon';
+            img.src = getLandingImage(element['url']);
 
             ul.appendChild(li);
             li.appendChild(maker);
@@ -28,6 +30,39 @@ function makeHTMLComponentsByJs(obj){
     }
 }
 
+function getLandingImage(url){
+
+    fetch('api/scraping',{
+
+        method:"POST",
+        url:"api/scraping",
+        body: JSON.stringify({
+            url: url
+        }),
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            'Content-Type': 'application/json'
+          },
+
+    })
+    .then((response) => {
+        var getResultImage = async function(){
+
+            const result = await new Promise((resolve,reject) => {
+                const res = response.text();
+                resolve(res);
+            });
+
+            const imageList = JSON.parse(result);
+
+            return imageList;
+        }
+
+        getResultImage();
+    })
+
+}
 
 
-export{makeHTMLComponentsByJs};
+
+export{makeHTMLComponentsByJs,getLandingImage};

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Candy;
 use Log;
 use Session;
+use  App\Services\CurlSendHTTPRequestServices;
 
 class ReactionController extends Controller
 {
@@ -20,6 +21,7 @@ class ReactionController extends Controller
        if($like_status === 'like'){
 
            $selectCandy = Candy::where('style',$category)->get();
+           
 
         //    Log::debug($selectCandy);
 
@@ -31,6 +33,16 @@ class ReactionController extends Controller
 
        return response()->json([$category => $selectCandy]);
 
+    }
+
+
+    public function scrape(Request $request){
+
+        $url = $request->url;
+
+        $image = CurlSendHTTPRequestServices::curl($url);
+
+        return response()->json(['landingImage' => $image]);
     }
 
 }

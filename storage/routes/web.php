@@ -23,8 +23,6 @@ Route::get('index','QuestionController@index')->name('questions.index');
 
 Route::post('api/search','ReactionController@create')->name('reaction.create');
 
-Route::post('api/scraping','ReactionController@scrape')->name('reaction.scrape');
-
 
 /*
 |--------------------------------------------------------------------------
