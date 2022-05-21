@@ -12,7 +12,6 @@ class CurlSendHTTPRequestServices{
 
     public static function curl($url){
 
-
         // $curl = curl_init();
 
         // $option = [
@@ -46,9 +45,10 @@ class CurlSendHTTPRequestServices{
         $dom = new Dom();
         $dom->loadFromUrl($url, $options);
 
-        // 商品名を取得
+
         $element = $dom->find('#landingImage')->src;
-        return $element . "\n";
+
+        return $element;
 
     }
 

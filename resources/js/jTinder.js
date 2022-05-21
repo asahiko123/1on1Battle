@@ -1,4 +1,4 @@
-import { makeHTMLComponentsByJs } from "./module";
+import { makeHTMLComponentsByJs,getLandingImage } from "./module";
 
 sessionStorage.clear();
 let currentQuestionIndex = 0;
@@ -33,7 +33,12 @@ let postReaction = function(category,reaction){
                 let element = candyList[el];
 
                 makeHTMLComponentsByJs(element);
-
+                
+                element.forEach((val) => {
+                    let temp = val.url;
+                    getLandingImage(temp);
+                    
+                })
             })
 
         }

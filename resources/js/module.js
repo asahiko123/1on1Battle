@@ -9,17 +9,16 @@ function makeHTMLComponentsByJs(obj){
             let li = document.createElement('li');
             let maker = document.createElement('p');
             let link = document.createElement('a');
-            let img = document.createElement('img');
 
             li.textContent = element['name'];
             maker.textContent = element['maker'];
             link.href = element['url'];
             link.textContent = '->amazon';
-            img.src = getLandingImage(element['url']);
 
             ul.appendChild(li);
             li.appendChild(maker);
             li.appendChild(link);
+
         })
 
     }else{
@@ -46,19 +45,23 @@ function getLandingImage(url){
 
     })
     .then((response) => {
-        var getResultImage = async function(){
 
-            const result = await new Promise((resolve,reject) => {
-                const res = response.text();
-                resolve(res);
-            });
+        return response.json();
+    })
+    .then(function(data){
 
-            const imageList = JSON.parse(result);
+        console.log(data.landingImage);
+        
+        let li = document.querySelectorAll('li');
+        console.log(li);
 
-            return imageList;
-        }
+        li.forEach(link => {
+            let img = document.createElement('img');
+            img.src = data.landingImage;
+            link.appendChild(img);
 
-        getResultImage();
+        })
+
     })
 
 }
