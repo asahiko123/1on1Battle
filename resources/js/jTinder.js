@@ -31,12 +31,14 @@ let postReaction = function(category,reaction){
 
             keyArray.forEach((el) => {
                 let element = candyList[el];
+                console.log(element);
 
                 makeHTMLComponentsByJs(element);
                 
                 element.forEach((val) => {
                     let temp = val.url;
-                    getLandingImage(temp);
+                    let name = val.name;
+                    getLandingImage(temp,name);
                     
                 })
             })

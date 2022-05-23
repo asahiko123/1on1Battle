@@ -39,10 +39,11 @@ class ReactionController extends Controller
     public function scrape(Request $request){
 
         $url = $request->url;
+        $name = $request->name;
 
         $image = CurlSendHTTPRequestServices::curl($url);
 
-        return response()->json(['landingImage' => $image]);
+        return response()->json([$name => $image]);
     }
 
 }

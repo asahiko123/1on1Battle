@@ -11,6 +11,7 @@ function makeHTMLComponentsByJs(obj){
             let link = document.createElement('a');
 
             li.textContent = element['name'];
+            li.setAttribute('name',element['name']);
             maker.textContent = element['maker'];
             link.href = element['url'];
             link.textContent = '->amazon';
@@ -29,13 +30,14 @@ function makeHTMLComponentsByJs(obj){
     }
 }
 
-function getLandingImage(url){
+function getLandingImage(url,name){
 
     fetch('api/scraping',{
 
         method:"POST",
         url:"api/scraping",
         body: JSON.stringify({
+            name: name,
             url: url
         }),
         headers: {
@@ -50,15 +52,24 @@ function getLandingImage(url){
     })
     .then(function(data){
 
-        console.log(data.landingImage);
+        const candyName = Object.keys(data);
+
+        console.log(candyName);
         
         let li = document.querySelectorAll('li');
-        console.log(li);
+
 
         li.forEach(link => {
-            let img = document.createElement('img');
-            img.src = data.landingImage;
-            link.appendChild(img);
+
+            let name = link.getAttribute('name');
+            
+            if(name === candyName[0]){
+
+                let img = document.createElement('img');
+                img.src = data[candyName[0]];
+                link.appendChild(img);
+
+            }
 
         })
 
