@@ -32,7 +32,7 @@ class CandyTableSeeder extends Seeder
                 'maker' => 'パイン',
                 'style' => 'フルーティー',
                 'taste' => '果物',
-                'url'   => 'https://www.amazon.co.jp/UHA%E5%91%B3%E8%A6%9A%E7%B3%96-%E7%89%B9%E6%BF%83%E3%83%9F%E3%83%AB%E3%82%AF8-2-%E6%BF%83%E9%A6%99%E3%81%84%E3%81%A1%E3%81%94-75g%C3%974%E8%A2%8B/dp/B08KXMLHM2/ref=sr_1_110?keywords=%E9%A3%B4&qid=1649769121&sr=8-110'
+                'url'   => 'https://www.amazon.co.jp/%E3%83%91%E3%82%A4%E3%83%B3-1160140-%E3%83%91%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%A1-120g-%C3%976%E8%A2%8B/dp/B08543WF7J/ref=sr_1_6?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=6VY2DGT5USZ1&keywords=%E3%83%91%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%A1&qid=1653277274&sprefix=%E3%83%91%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%A1%2Caps%2C175&sr=8-6'
 
             ],[
 

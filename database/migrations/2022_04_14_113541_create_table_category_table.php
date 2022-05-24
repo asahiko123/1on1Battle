@@ -27,6 +27,6 @@ class CreateTableCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_category');
+        Schema::dropIfExists('category');
     }
 }
