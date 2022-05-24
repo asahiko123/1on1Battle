@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $table = 'category';
-    
+
     protected $fillable = [
         'category'
     ];
@@ -30,4 +30,8 @@ class Category extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function candy(){
+        return $this->belongsToMany('App\Candy')->withTimeStamps();
+    }
 }
