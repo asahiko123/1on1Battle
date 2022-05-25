@@ -62,7 +62,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:admin'],function(){
     Route::get('category/edit/{id}','CategoryController@edit')->name('category.edit');
     Route::post('category/update/{id}','CategoryController@update')->name('category.update');
     Route::post('category/delete/{id}','CategoryController@destroy')->name('category.destroy');
-    Route::match(['post','get'],'index','CandyController@index')->name('candy.index');
+    Route::match(['post','get'],'candy/index','CandyController@index')->name('candy.index');
     Route::post('candy/store','CandyController@store')->name('candy.store');
     Route::get('candy/edit/{id}','CandyController@edit')->name('candy.edit');
     Route::post('candy/delete/{id}','CandyController@destroy')->name('candy.destroy');

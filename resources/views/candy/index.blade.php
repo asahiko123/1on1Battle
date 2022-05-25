@@ -56,7 +56,7 @@
               <td> {{$candy->name}}</td>
               <td> {{$candy->maker}}</td>
               <td> {{$candy->url}}</td>
-              <td></td>
+              <td> {{$candy->tag}}</td>
               <td><button class="btn btn-success text-nowrap" onclick="location.href='{{ route('candy.edit',['id'=> $candy->id])}}'">編集</button></td>
               <td>
                 <form method="POST" action="{{route('candy.destroy',['id'=> $candy->id])}}">
@@ -64,6 +64,7 @@
                   <button type ="submit" class="btn btn-danger text-nowrap">削除</button>
                 </form>
               </td>
+
           </tr>
         @endforeach
         @endif

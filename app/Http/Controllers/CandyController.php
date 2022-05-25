@@ -24,14 +24,20 @@ class CandyController extends Controller
 
     public function store(Request $request){
 
+        
         $candy = new Candy;
-        $category = new Category;
 
         $candy->name = $request->name;
         $candy->maker = $request->maker;
         $candy->url = $request->url;
+        $candy->tag = $request->tag;
+        $candy->style = "aaa";
+        $candy->taste = "bbb";
+
+        $candy->save();
 
         $input_tag = $request->tag;
+    
 
         if(isset($input_tag)){
             $tags_id = [];
