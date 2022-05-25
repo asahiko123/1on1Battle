@@ -17,9 +17,9 @@
         <div class="col-sm-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title">結果画面に表示される飴の登録</h5>
+              <p class="card-text"></p>
+              <a href="{{route('candy.index')}}" class="btn btn-primary">登録をする</a>
             </div>
           </div>
         </div>
@@ -72,8 +72,8 @@
             @endforeach
         </tbody>
       </table>
-      
-        
+
+
     </div>
 </div>
 @endsection
