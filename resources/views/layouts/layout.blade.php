@@ -12,9 +12,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- fontawsome-->
+    <script src="https://kit.fontawesome.com/dfa99fbf31.js" crossorigin="anonymous"></script>
 </head>
 <body>
-   
+
     @yield('content')
 
     <!-- Scripts -->
