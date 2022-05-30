@@ -38124,6 +38124,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 sessionStorage.clear();
 var currentQuestionIndex = 0;
 
+window.onload = function () {
+  var loader = document.getElementById('loader');
+  loader.classList.add('loaded');
+};
+
 var postReaction = function postReaction(category, reaction) {
   fetch('api/search', {
     method: "POST",

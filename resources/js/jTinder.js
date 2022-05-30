@@ -3,6 +3,10 @@ import { makeHTMLComponentsByJs,getLandingImage } from "./module";
 sessionStorage.clear();
 let currentQuestionIndex = 0;
 
+window.onload = ()=> {
+    const loader = document.getElementById('loader');
+    loader.classList.add('loaded');
+}
 let postReaction = function(category,reaction){
 
     fetch('api/search',{
@@ -34,12 +38,12 @@ let postReaction = function(category,reaction){
                 console.log(element);
 
                 makeHTMLComponentsByJs(element);
-                
+
                 element.forEach((val) => {
                     let temp = val.url;
                     let name = val.name;
                     getLandingImage(temp,name);
-                    
+
                 })
             })
 
