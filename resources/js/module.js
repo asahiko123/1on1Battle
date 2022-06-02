@@ -55,14 +55,14 @@ function getLandingImage(url,name){
         const candyName = Object.keys(data);
 
         console.log(candyName);
-        
+
         let li = document.querySelectorAll('li');
 
 
         li.forEach(link => {
 
             let name = link.getAttribute('name');
-            
+
             if(name === candyName[0]){
 
                 let img = document.createElement('img');
@@ -77,6 +77,17 @@ function getLandingImage(url,name){
 
 }
 
+function removeClassList(){
+    const loading = document.getElementById('loader');
+    loading.classList.remove('loaded');
+
+}
+
+function addClassList(){
+    const loading = document.getElementById('loader');
+    loading.classList.add('loaded');
+}
 
 
-export{makeHTMLComponentsByJs,getLandingImage};
+
+export{makeHTMLComponentsByJs,getLandingImage,removeClassList,addClassList};

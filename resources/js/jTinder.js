@@ -1,4 +1,4 @@
-import { makeHTMLComponentsByJs,getLandingImage } from "./module";
+import { makeHTMLComponentsByJs,getLandingImage, removeClassList ,addClassList } from "./module";
 
 window.addEventListener("DOMContentLoaded",function() {
     const loader = document.getElementById('loader');
@@ -23,6 +23,9 @@ let postReaction = function(category,reaction){
           },
     })
     .then((response) => {
+
+        removeClassList();
+
         var buildResultForm = async function(){
 
             var result = await new Promise((resolve, reject) => {
@@ -51,6 +54,7 @@ let postReaction = function(category,reaction){
         }
 
         buildResultForm();
+
 
     })
 

@@ -38141,6 +38141,8 @@ var postReaction = function postReaction(category, reaction) {
       'Content-Type': 'application/json'
     }
   }).then(function (response) {
+    Object(_module__WEBPACK_IMPORTED_MODULE_1__["removeClassList"])();
+
     var buildResultForm = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var result, candyList, keyArray;
@@ -38654,13 +38656,15 @@ var makeCandyTag = function makeCandyTag() {
 /*!********************************!*\
   !*** ./resources/js/module.js ***!
   \********************************/
-/*! exports provided: makeHTMLComponentsByJs, getLandingImage */
+/*! exports provided: makeHTMLComponentsByJs, getLandingImage, removeClassList, addClassList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeHTMLComponentsByJs", function() { return makeHTMLComponentsByJs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLandingImage", function() { return getLandingImage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeClassList", function() { return removeClassList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addClassList", function() { return addClassList; });
 function makeHTMLComponentsByJs(obj) {
   if (obj !== null) {
     obj.forEach(function (element) {
@@ -38714,6 +38718,16 @@ function getLandingImage(url, name) {
       }
     });
   });
+}
+
+function removeClassList() {
+  var loading = document.getElementById('loader');
+  loading.classList.remove('loaded');
+}
+
+function addClassList() {
+  var loading = document.getElementById('loader');
+  loading.classList.add('loaded');
 }
 
 
