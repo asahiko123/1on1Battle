@@ -1,5 +1,5 @@
 html, body {
-    height: 100%;
+    height: 100vh;
     padding: 0;
     margin: 0;
     position: relative;
@@ -19,13 +19,21 @@ html, body {
     padding: 5%;
 }
 
+.container{
+
+    &.slide{
+        position: relative;
+    }
+
+}
 #tinderslide {
-    position: relative;
+    position: flex;
     background: #fff;
     width: 90vw;
     height: 70vh;
     max-width: 600px;
     margin: 0 auto;
+    z-index: 1;
     ul {
       margin: 0;
       position: relative;

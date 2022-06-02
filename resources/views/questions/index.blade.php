@@ -16,7 +16,8 @@
             <div class="sk-circle11 sk-child"></div>
             <div class="sk-circle12 sk-child"></div>
         </div>
-    <div class="container">
+    <div class="container slide">
+
         <div id="tinderslide">
             <h1 class="h3 loginPage_contents_title">飴ちゃんセレクター</h1>
             <ul>

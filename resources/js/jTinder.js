@@ -1,12 +1,13 @@
 import { makeHTMLComponentsByJs,getLandingImage } from "./module";
 
+window.addEventListener("DOMContentLoaded",function() {
+    const loader = document.getElementById('loader');
+    loader.classList.add('loaded');
+});
+
 sessionStorage.clear();
 let currentQuestionIndex = 0;
 
-window.onload = ()=> {
-    const loader = document.getElementById('loader');
-    loader.classList.add('loaded');
-}
 let postReaction = function(category,reaction){
 
     fetch('api/search',{

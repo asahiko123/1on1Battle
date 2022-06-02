@@ -21299,13 +21299,17 @@ readers do not read off random characters that represent icons */
   content: "\F63F";
 }
 
+.loginPage {
+  height: 100vh;
+}
+
 .loginPage_contents {
-  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
   align-items: center;
+  position: relative;
 }
 
 .loginPage_contents_title {
@@ -21555,7 +21559,7 @@ body {
 
 html,
 body {
-  height: 100%;
+  height: 100vh;
   padding: 0;
   margin: 0;
   position: relative;
@@ -21591,13 +21595,18 @@ body {
   padding: 5%;
 }
 
-#tinderslide {
+.container.slide {
   position: relative;
+}
+
+#tinderslide {
+  position: flex;
   background: #fff;
   width: 90vw;
   height: 70vh;
   max-width: 600px;
   margin: 0 auto;
+  z-index: 1;
 }
 
 #tinderslide ul {
@@ -21820,6 +21829,7 @@ body {
 #resultForm {
   text-align: center;
   text-decoration: none;
+  z-index: 1;
 }
 
 #resultForm li {
@@ -21852,8 +21862,9 @@ body {
 
 #loader {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: #00c2bc;
+  display: block;
 }
 
 #loader.loaded {
@@ -21862,17 +21873,15 @@ body {
 }
 
 .sk-circle {
-  margin: 100px auto;
-  width: 40px;
-  height: 40px;
-  position: relative;
+  position: absolute;
+  top: 0;
+  z-index: 100;
 }
 
 .sk-circle .sk-child {
   width: 100%;
-  height: 100%;
+  height: 50%;
   position: absolute;
-  left: 0;
   top: 0;
 }
 
