@@ -73,6 +73,9 @@ function getLandingImage(url,name){
 
         })
 
+        console.log('aaa');
+        addClassList();
+
     })
 
 }

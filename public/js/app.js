@@ -38717,6 +38717,8 @@ function getLandingImage(url, name) {
         link.appendChild(img);
       }
     });
+    console.log('aaa');
+    addClassList();
   });
 }
 
