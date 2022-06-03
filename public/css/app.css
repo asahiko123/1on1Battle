@@ -21835,6 +21835,23 @@ body {
 
 #resultForm li {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+#resultForm li h2 {
+  margin: 10px 0px;
+}
+
+#resultForm img {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+#resultForm ul.recommend {
+  background-color: rgb(255, 255, 255);
+  border-radius: 5%;
 }
 
 @-webkit-keyframes fadeOut {

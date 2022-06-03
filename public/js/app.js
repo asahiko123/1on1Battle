@@ -38671,14 +38671,16 @@ function makeHTMLComponentsByJs(obj) {
       console.log(element['name']);
       var ul = document.querySelector('ul.recommend');
       var li = document.createElement('li');
+      var candyName = document.createElement('h2');
       var maker = document.createElement('p');
       var link = document.createElement('a');
-      li.textContent = element['name'];
+      candyName.textContent = element['name'];
       li.setAttribute('name', element['name']);
       maker.textContent = element['maker'];
       link.href = element['url'];
       link.textContent = '->amazon';
       ul.appendChild(li);
+      li.appendChild(candyName);
       li.appendChild(maker);
       li.appendChild(link);
     });

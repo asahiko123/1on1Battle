@@ -7,16 +7,18 @@ function makeHTMLComponentsByJs(obj){
 
             let ul = document.querySelector('ul.recommend');
             let li = document.createElement('li');
+            let candyName = document.createElement('h2');
             let maker = document.createElement('p');
             let link = document.createElement('a');
 
-            li.textContent = element['name'];
+            candyName.textContent = element['name'];
             li.setAttribute('name',element['name']);
             maker.textContent = element['maker'];
             link.href = element['url'];
             link.textContent = '->amazon';
 
             ul.appendChild(li);
+            li.appendChild(candyName);
             li.appendChild(maker);
             li.appendChild(link);
 

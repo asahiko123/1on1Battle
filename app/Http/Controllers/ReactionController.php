@@ -20,8 +20,8 @@ class ReactionController extends Controller
 
        if($like_status === 'like'){
 
-           $selectCandy = Candy::where('style',$category)->get();
-           
+           $selectCandy = Candy::where('tag','like',"%$category%")->get();
+
 
         //    Log::debug($selectCandy);
 
